@@ -29,3 +29,9 @@ jobs:
             - id: apply
               name: Terraform Apply
               run: terraform apply -auto-approve 
+            - id: get-access-key
+              name: Get Access Key
+              run: |
+                PRIMARY_ACCESS_KEY=$(az storage account keys list --resource-group my-terraform-state-rg --account-name mytfstatesahca --query "[0].value" --output tsv)
+                echo "::set-output name=primary_access_key::$PRIMARY_ACCESS_KEY"
+                echo "$PRIMARY_ACCESS_KEY" > azure-storage-access-key.txt
