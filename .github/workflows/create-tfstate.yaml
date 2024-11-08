@@ -33,5 +33,5 @@ jobs:
               name: Get Access Key
               run: |
                 PRIMARY_ACCESS_KEY=$(az storage account keys list --resource-group my-terraform-state-rg --account-name mytfstatesahca --query "[0].value" --output tsv)
-                echo "::set-output name=primary_access_key::$PRIMARY_ACCESS_KEY"
-                echo "$PRIMARY_ACCESS_KEY" > azure-storage-access-key.txt
+                echo "primary_access_key=$PRIMARY_ACCESS_KEY" >> $GITHUB_OUTPUT
+                echo $GITHUB_OUTPUT > azure-storage-access-key.txt
